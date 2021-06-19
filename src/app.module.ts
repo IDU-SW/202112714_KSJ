@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Song } from './song/table/song.table';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -12,7 +13,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
     dialectOptions: { charset: 'utf8mb4', dateStrings: true, typeCast: true },
     synchronize: true,
     autoLoadModels: true,
-    models: [],
+    models: [Song],
   })],
   controllers: [],
   providers: [],
