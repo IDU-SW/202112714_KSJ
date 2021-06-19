@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Song } from './song/table/song.table';
 import { AlbumModule } from './album/album.module';
 import { Album } from './album/table/album.table';
+import { SongModule } from './song/song.module';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -16,7 +17,9 @@ import { Album } from './album/table/album.table';
     synchronize: true,
     autoLoadModels: true,
     models: [Song, Album],
-  }), AlbumModule],
+  }), 
+  SongModule,
+  AlbumModule],
   controllers: [],
   providers: [],
 })
