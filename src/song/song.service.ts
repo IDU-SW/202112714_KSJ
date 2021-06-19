@@ -28,8 +28,8 @@ export class SongService {
                 },
             });
             //const test = Object.assign([],result);
-
             console.log(result);
+            //console.log(result[1].id);
             return result;
 
         } catch (error) {
@@ -40,7 +40,17 @@ export class SongService {
 
     async getSong(id: string){
         try {
-            return await this.song.findOne({where: {id: id}, raw:true });
+            const result = await this.song.findOne({
+                where: {id: id}, 
+                raw:true,
+                include: {model: Album},
+                attributes: {
+                    include: [[Sequelize.literal('album.title'),"albumTitle"]],
+                },
+            });
+            console.log(result);
+            return result;
+
         } catch (error) {
             console.log(error);
             
@@ -53,7 +63,8 @@ export class SongService {
             if(!findSong){
                 return false
             } else {
-                await this.song.update({title: body.title, genre: body.genre},
+                await this.song.update({title: body.title, genre: body.genre, relDate: body.relDate, 
+                    album_id: body.album_id, artist_id: body.artist_id},
                     {where: {id: body.id}}, 
                 );
             }
