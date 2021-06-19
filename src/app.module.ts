@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Song } from './song/table/song.table';
 import { AlbumModule } from './album/album.module';
+import { Album } from './album/table/album.table';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -14,7 +15,7 @@ import { AlbumModule } from './album/album.module';
     dialectOptions: { charset: 'utf8mb4', dateStrings: true, typeCast: true },
     synchronize: true,
     autoLoadModels: true,
-    models: [Song],
+    models: [Song, Album],
   }), AlbumModule],
   controllers: [],
   providers: [],

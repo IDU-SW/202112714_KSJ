@@ -1,6 +1,7 @@
 import { DATE } from "sequelize";
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from "sequelize-typescript";
 import { Col } from "sequelize/types/lib/utils";
+import { Album } from "src/album/table/album.table";
 
 @Table({})
 export class Song extends Model {
@@ -11,10 +12,15 @@ export class Song extends Model {
     })
     id: number;
 
-    @Column({ defaultValue: 0 })
+    //1 하나씩만.
+    @BelongsTo(()=>Album)
+    album:Album
+
+    @Column({ defaultValue: 1})
+    @ForeignKey(()=>Album)
     album_id: number;
 
-    @Column({ defaultValue: 0})
+    @Column({ defaultValue: 1})
     artist_id: number;
 
     @Column({
@@ -31,6 +37,8 @@ export class Song extends Model {
         type:DataType.DATE,
     })
     relDate: Date;
+
+
 
 }
 
