@@ -4,6 +4,8 @@ import { Song } from './song/table/song.table';
 import { AlbumModule } from './album/album.module';
 import { Album } from './album/table/album.table';
 import { SongModule } from './song/song.module';
+import { ArtistModule } from './artist/artist.module';
+import { Artist } from './artist/table/artist.table';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -16,10 +18,11 @@ import { SongModule } from './song/song.module';
     dialectOptions: { charset: 'utf8mb4', dateStrings: true, typeCast: true },
     synchronize: true,
     autoLoadModels: true,
-    models: [Song, Album],
+    models: [Song, Album, Artist],
   }), 
   SongModule,
-  AlbumModule],
+  AlbumModule,
+  ArtistModule],
   controllers: [],
   providers: [],
 })

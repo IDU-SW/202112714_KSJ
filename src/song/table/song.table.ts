@@ -2,6 +2,7 @@ import { DATE } from "sequelize";
 import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from "sequelize-typescript";
 import { Col } from "sequelize/types/lib/utils";
 import { Album } from "src/album/table/album.table";
+import { Artist } from "src/artist/table/artist.table";
 
 @Table({})
 export class Song extends Model {
@@ -20,7 +21,11 @@ export class Song extends Model {
     @ForeignKey(()=>Album)
     album_id: number;
 
+    @BelongsTo(()=>Artist)
+    artist:Artist
+
     @Column({ defaultValue: 1})
+    @ForeignKey(()=>Artist)
     artist_id: number;
 
     @Column({
