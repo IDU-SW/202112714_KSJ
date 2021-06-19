@@ -11,7 +11,16 @@ export class SongController {
 
     @Get('')
     hello(){
-        return 'mainpage';
+        let result  = 
+        `
+        <h1>🎵Song Routes Examples🎶</h1>
+            <li>곡 전체보기 : /song/read</li>
+            <li>곡 하나 보기 : /song/read/1</li>
+            <li>곡 생성 : /song/create</li>
+            <li>곡 수정 : /song/update</li>
+            <li>곡 삭제 : /song/delete/3</li>
+        `
+        return result;
     }
 
     @Get('read')

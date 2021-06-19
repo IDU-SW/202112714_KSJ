@@ -12,7 +12,8 @@ export class SongService {
 
     async createSong(body : CreateSongInput){
         try{
-            await this.song.create({ ...body }, {raw: true});       
+            await this.song.create({ ...body }, {raw: true});
+            console.log("성공");    
         } catch (error){
             console.log(error);
         }
@@ -29,7 +30,7 @@ export class SongService {
             });
             //const test = Object.assign([],result);
             console.log(result);
-            //console.log(result[1].id);
+            console.log("성공");
             return result;
 
         } catch (error) {
@@ -49,6 +50,7 @@ export class SongService {
                 },
             });
             console.log(result);
+            console.log("성공");
             return result;
 
         } catch (error) {
@@ -67,7 +69,9 @@ export class SongService {
                     album_id: body.album_id, artist_id: body.artist_id},
                     {where: {id: body.id}}, 
                 );
+                console.log("성공");
             }
+            
 
         } catch (error) {
             console.log(error);
@@ -83,7 +87,9 @@ export class SongService {
             } else {
                 await this.song.destroy({where: {id: id}} 
                 );
+                console.log("성공");
             }
+            
 
         } catch (error) {
             console.log(error);
