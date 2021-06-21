@@ -57,6 +57,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+※ DB연결<br>
+- 로컬서버에서 DB에 연결하려면 `.env` 파일을 프로젝트 루트위치에 만들고 
+<br>다음 정보를 로컬환경에 알맞게 추가해야합니다.
+
+```
+DB_HOST=localhost
+DB_USER=username
+DB_PASS=password
+DB_NAME=database
+```
+
 <br><br>
 ---
 
