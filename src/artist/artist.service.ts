@@ -25,6 +25,9 @@ export class ArtistService {
         try {
             const result = await this.artist.findAll({
                 raw:true,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
             });
             //const test = Object.assign([],result);
             console.log(result);
@@ -40,9 +43,19 @@ export class ArtistService {
     async getArtist(id: string){
         try{
             const result = await this.artist.findAll(
-                {where: {id: id}, 
-                include:{model: Song}, 
-                raw:true,});
+            {
+                where: {id: id}, 
+                include:{
+                    model: Song,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt'],
+                    },  
+                }, 
+                raw:true,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
+            });
             console.log(result);
             return result;
         }catch{
