@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize';
 import { Album } from 'src/album/table/album.table';
+import { Artist } from 'src/artist/table/artist.table';
 import { CreateSongInput } from './dto/create-song.dto';
 import { updateSongInput } from './dto/update-song-dto';
 import { Song } from './table/song.table';
@@ -22,10 +23,25 @@ export class SongService {
     async getSongs(){
         try {
             const result = await this.song.findAll({
-                include: {model: Album}, 
+                include:[
+                    {   model: Album,
+                        attributes: {
+                            exclude: ['id', 'createdAt', 'updatedAt', 'title'],
+                        },                       
+                    },
+                    {   model: Artist,
+                        attributes: {
+                            exclude: ['id', 'createdAt', 'updatedAt', 'name'],
+                        },                       
+                    },
+                ],
                 raw:true,
                 attributes: {
-                    include: [[Sequelize.literal('album.title'),"albumTitle"]],
+                    include: [
+                        [Sequelize.literal('album.title'),'albumTitle'],
+                        [Sequelize.literal('artist.name'),'artistName'],
+                    ],
+                    exclude: ['album_id','artist_id','createdAt', 'updatedAt']
                 },
             });
             //const test = Object.assign([],result);
@@ -44,9 +60,20 @@ export class SongService {
             const result = await this.song.findOne({
                 where: {id: id}, 
                 raw:true,
-                include: {model: Album},
+                include: [
+                    {   model: Album,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt'],
+                        },                       
+                    },
+                    {   model: Artist,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt'],
+                        },                       
+                    },
+                ],
                 attributes: {
-                    include: [[Sequelize.literal('album.title'),"albumTitle"]],
+                    exclude: ['createdAt', 'updatedAt']
                 },
             });
             console.log(result);
